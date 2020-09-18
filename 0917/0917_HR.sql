@@ -46,12 +46,12 @@ REM 포괄조인, 외부조인, OUTER JOIN
 SELECT  employee_id, first_name, e.department_id, d.department_id, department_name
 FROM  employees e, departments d
 WHERE e.department_id(+) = d.department_id;   --정보 부족한 쪽에 (+) --오른쪽 테이블에 맞게 왼쪽 테이블 출력 (왼쪽 테이블에 NULL발생할 수 있음).
---표준 조인 (RIGHT OUTER JOIN ~ ON) (정보 부족한 테이블이 왼쪽에)
+--표준 조인 (RIGHT OUTER JOIN ~ ON) (정보 부족한 테이블이 왼쪽에) (비표준에서 +연산자 왼쪽) (정보 부족한 테이블 : employees : NULL값이 나올 수 있음.)
 SELECT  employee_id, first_name, e.department_id, d.department_id, department_name
 FROM employees e RIGHT OUTER JOIN departments d ON e.department_id = d.department_id;  --공통칼럼 명시.
 
 --사원 중 소속 부서가 없는 사원이 있는가?
---비표준 조인 (LEFT OUTER JOIN) (+가 오른쪽에_
+--비표준 조인 (LEFT OUTER JOIN) (+가 오른쪽에) (정보 부족한 테이블 : 오른쪽) (오른쪽 테이블이 NULL값으로 나올 수 있음) (employees의 데이터는 있는데, departments의 데이터 NULL 될 수 있음) (사원 중 부서가 없는 사원 출력)
 SELECT  employee_id, first_name, e.department_id, d.department_id, department_name
 FROM  employees e, departments d
 WHERE e.department_id = d.department_id(+);    --부서쪽이 정보 부족하게 출력. --왼쪽 테이블에 맞게 오른쪽 테이블 데이터 출력.
